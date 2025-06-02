@@ -1,0 +1,57 @@
+<mat-toolbar color="primary">
+  <span>{{headerText}}</span>
+</mat-toolbar>
+
+<div class="form-container">
+  <form class="employee-form" [formGroup]="employeeForm" (ngSubmit)="saveForm()">
+    <mat-form-field appearance="outline">
+      <mat-label>First Name</mat-label>
+      <input matInput placeholder="Enter first name" formControlName="firstname">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Last Name</mat-label>
+      <input matInput placeholder="Enter last name" formControlName="lastname">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" placeholder="Enter email" formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Gender</mat-label>
+      <mat-select formControlName="gender">
+        <mat-option value="male">Male</mat-option>
+        <mat-option value="female">Female</mat-option>
+        <mat-option value="other">Other</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Education</mat-label>
+      <mat-select formControlName="education">
+        <mat-option value="bachelor">Bachelor's</mat-option>
+        <mat-option value="Masters">Master's</mat-option>
+        <mat-option value="phd">PhD</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Company</mat-label>
+      <input matInput placeholder="Enter company name" formControlName="company">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Experience (years)</mat-label>
+      <input matInput type="number" placeholder="Enter experience" formControlName="experience">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Package (in LPA)</mat-label>
+      <input matInput type="number" placeholder="Enter package" formControlName="lpa">
+    </mat-form-field>
+
+    <button mat-raised-button color="accent">{{btnText}}</button>
+  </form>
+</div>
