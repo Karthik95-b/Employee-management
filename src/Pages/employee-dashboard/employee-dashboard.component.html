@@ -1,5 +1,14 @@
 <div class="employee dashboad">
  <h3>Employee List</h3>
+
+ <div class="emp_add">
+ @if (isRestrict) {
+    <button mat-button (click)="addEmployee()">Add Employee</button>
+    } </div>
+</div>
+
+<div class="emp search">
+<app-employee-search (search)="handleSearch($event)"></app-employee-search>
 </div>
 
 <div class="emplyee_table">

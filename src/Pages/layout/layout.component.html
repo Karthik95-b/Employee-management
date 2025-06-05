@@ -2,7 +2,27 @@
   <mat-toolbar-row>
     <span>Employee Management</span>
     <span class="spacer"></span>
-    <button mat-button (click)="addEmployee()">Add Employee</button>
+
+          <span class="greeting">Hello, {{employeeName}}</span>
+
+          <div class="avatar" (click)="logout()">
+            <mat-icon>power_settings_new</mat-icon>
+
+          </div>
+      <!-- <div class="user-menu" [matMenuTriggerFor]="menu" matTooltip="User Menu" matTooltipPosition="below">
+      <span class="greeting">Hello, {{employeeName}}</span>
+
+      <div class="avatar">
+        {{ getInitials(employeeName) }}
+      </div>
+    </div>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        Logout
+      </button>
+    </mat-menu> -->
   </mat-toolbar-row>
 </mat-toolbar>
 <router-outlet></router-outlet>

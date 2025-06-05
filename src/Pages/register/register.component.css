@@ -1,0 +1,43 @@
+.register_page {
+  background-color: lightblue;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   padding: 1rem;
+}
+
+.form_container {
+  background-color: white;
+  padding: 2rem 3rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+}
+
+.full_width {
+  width: 100%;
+  /* margin-bottom: 16px; */
+}
+.register {
+       margin-bottom: 30px !important;
+       text-align: center;
+}
+.form-btn {
+    text-align: center;
+}
+.btnSubmit {
+    background-color: lightblue;
+    color: black;
+    border-radius: 20px;
+}
+.alredyRegister p {
+    font-size: 14px;
+}
+.alredyRegister p span {
+    text-decoration: underline;
+    color: blue;
+    padding-left: 5px;
+    cursor: pointer;
+}

@@ -23,4 +23,12 @@ export class ApiService {
     let id = formValues._id;
     return this.http.put(`${this.baseURL}/employee/${id}`,formValues)
   }
+  //register
+  registerUser(formValues:any){
+    return this.http.post(`${this.baseURL}/employee_register`,formValues)
+  }
+  //login
+  loginUser(formValues:any){
+    return this.http.post(`${this.baseURL}/employee_Login`,formValues)
+  }
 }

@@ -1,6 +1,44 @@
 .navbar {
-        background: lightblue !important
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  background-color: lightblue;
 }
+
+.app-title {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
 .spacer {
   flex: 1 1 auto;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.greeting {
+  margin-right: 10px;
+  font-weight: 500;
+  color: #171616;
+  white-space: nowrap;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  background-color: #3f51b5; /* Primary dark */
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 0 3px rgba(0,0,0,0.3);
+  cursor: pointer;
 }

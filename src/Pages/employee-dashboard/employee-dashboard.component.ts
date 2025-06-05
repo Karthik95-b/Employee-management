@@ -7,10 +7,12 @@ import { error, log } from 'console';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { EmployeeSearchComponent } from "../employee-search/employee-search.component";
 
 @Component({
   selector: 'app-employee-dashboard',
-  imports: [MatTableModule,MatPaginatorModule,ToastrModule],
+  imports: [MatTableModule, 
+    MatPaginatorModule, ToastrModule, EmployeeSearchComponent],
   templateUrl: './employee-dashboard.component.html',
   styleUrl: './employee-dashboard.component.css'
 })
@@ -20,34 +22,29 @@ export class EmployeeDashboardComponent implements OnInit {
   @ViewChild('paginator') paginator!: MatPaginator;
 
   refreshDashBoard = inject(RefreshDashboardService);
+  fullEmployeeList: any = [];
+
+  isRestrict:boolean = false;
   constructor(private apiServ:ApiService, 
     private dialog: MatDialog, public toaster:ToastrService){
 
   }
   ngOnInit(): void {
+       let user = JSON.parse(localStorage.getItem('user') as any);
+    console.log('user',user)
+    // if(user.role === 'admin'){
+    //   this.isRestrict = true
+    // } else {
+    //   this.isRestrict = false;
+    // }
+    this.isRestrict = (user.role === 'admin') ? true : false;
+
     this.getAllEmployess();
    this.refreshDashBoard.$refreshAPI.subscribe(() => {
     this.getAllEmployess();
   });
 
   }
-getAllEmployess() {
-  this.apiServ.getAllEmployess().subscribe({
-    next: (res: any) => {
-           if (res?.success && res.data) {
-          this.empployeeDataSource = new MatTableDataSource(res.data);
-          setTimeout(() => {
-          this.empployeeDataSource.paginator = this.paginator; 
-           }, 200);
-        }
-    },
-    error: (error: any) => {
-    },
-    complete: () => {
-    }
-  });
-}
-
     ngAfterViewInit() {
     // Assign the paginator to the dataSource once view is initialized
     this.empployeeDataSource.paginator = this.paginator;
@@ -70,9 +67,21 @@ getAllEmployess() {
    })
     } 
   }
+  addEmployee(){
+    const dialogRef = this.dialog.open(AddEmployeeComponent,{
+   
+  width: '90vw',
+  maxWidth: '600px',
+  maxHeight: '95vh',
+   })
+  // Subscribe to the afterClosed event
+  dialogRef.afterClosed().subscribe(result => {
+    this.refreshDashBoard.triggerRefresh();
+    // Perform actions after the dialog is closed, such as updating data or navigating.
+  });
+  }
   onEdit(element:any) {
      const dialogRef = this.dialog.open(AddEmployeeComponent,{
-   
   width: '90vw',
   maxWidth: '600px',
   maxHeight: '95vh',
@@ -88,4 +97,31 @@ data: {
   showToaster(){
    this.toaster.success('Hello')
   }
+
+    handleSearch(value: string) {
+      let searchedValue = value.toLowerCase();
+      console.log('searchedValue',searchedValue)
+      let filterData = this.fullEmployeeList.filter((emp:any)=>{
+      return emp?.firstname.toLowerCase().includes(searchedValue) 
+      })
+      this.empployeeDataSource = new MatTableDataSource(filterData)
+  }
+  getAllEmployess() {
+  this.apiServ.getAllEmployess().subscribe({
+    next: (res: any) => {
+      console.log('res',res)
+           if (res?.success && res.data) {
+             this.fullEmployeeList = res.data;
+          this.empployeeDataSource = new MatTableDataSource(res.data);
+          setTimeout(() => {
+          this.empployeeDataSource.paginator = this.paginator; 
+           }, 200);
+        }
+    },
+    error: (error: any) => {
+    },
+    complete: () => {
+    }
+  });
+}
 }

@@ -1,0 +1,59 @@
+<div class="register_page">
+  <div class="form_container">
+    <h2 class="register">{{ isRegister ? 'Login' : 'Register' }}</h2>
+    @if (!isRegister) {
+ <form [formGroup]="registerForm" (ngSubmit)="saveForm()">
+      <mat-form-field appearance="outline" class="full_width">
+        <mat-label>Full Name</mat-label>
+        <input matInput formControlName="fullName" placeholder="Enter Full Name" formControlName="fullName" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full_width">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" placeholder="Enter Email" formControlName="email" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full_width">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" placeholder="Enter Password" formControlName="password" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full_width">
+        <mat-label>Confirm Password</mat-label>
+        <input matInput type="password" formControlName="confirmPassword" placeholder="Confirm Password" formControlName="confirmPassword"  required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full_width">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role" required>
+          <mat-option value="admin">Admin</mat-option>
+          <mat-option value="hr">HR</mat-option>
+        </mat-select>
+      </mat-form-field>
+     
+         <div class="alredyRegister">
+        <p>Already Register ?<span (click)="loginForm()">Log In</span></p>
+    </div>
+      <div class="form-btn">
+            <button mat-raised-button matButton="filled" class="btnSubmit" type="submit">Register</button>
+      </div>
+    </form>
+    }  @else {
+           <form [formGroup]="loginFormInit" (ngSubmit)="submitLogin()">
+        <mat-form-field appearance="outline" class="full_width">
+        <mat-label>Email</mat-label>
+        <input matInput type="email"  placeholder="Enter Email" formControlName="email" required />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full_width">
+        <mat-label>Password</mat-label>
+        <input matInput type="password"  placeholder="Enter Password" formControlName="password" required />
+      </mat-form-field>
+       <div class="form-btn">
+            <button mat-raised-button matButton="filled" class="btnSubmit" type="submit">Login</button>
+      </div>
+    </form>
+    } 
+
+   
+  </div>
+</div>
